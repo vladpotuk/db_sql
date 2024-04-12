@@ -1,0 +1,38 @@
+USE db_sql;
+
+CREATE TABLE Building (
+    BuildingId INT PRIMARY KEY,
+    Financing MONEY NOT NULL DEFAULT 0,
+    Floor INT NOT NULL CHECK (Floor >= 1),
+    Name NVARCHAR(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE Diseases (
+    DiseaseId INT PRIMARY KEY IDENTITY,
+    Name NVARCHAR(100) NOT NULL UNIQUE,
+    Severity INT NOT NULL DEFAULT 1 CHECK (Severity >= 1)
+);
+
+CREATE TABLE Doctors (
+    DoctorId INT PRIMARY KEY IDENTITY,
+    Name NVARCHAR(MAX) NOT NULL,
+    Phone CHAR(10) NOT NULL,
+    Premium MONEY NOT NULL DEFAULT 0,
+    Salary MONEY NOT NULL CHECK (Salary > 0),
+    Surname NVARCHAR(MAX) NOT NULL
+);
+
+CREATE TABLE Examinations (
+    ExaminationId INT PRIMARY KEY IDENTITY,
+    DayOfWeek INT NOT NULL CHECK (DayOfWeek BETWEEN 1 AND 7),
+    EndTime TIME NOT NULL,
+    Name NVARCHAR(100) NOT NULL UNIQUE,
+    StartTime TIME NOT NULL CHECK (StartTime >= '08:00' AND StartTime <= '18:00')
+);
+
+CREATE TABLE Wards (
+    WardId INT PRIMARY KEY IDENTITY,
+    Building INT NOT NULL CHECK (Building BETWEEN 1 AND 5),
+    Floor INT NOT NULL CHECK (Floor >= 1),
+    Name NVARCHAR(20) NOT NULL UNIQUE
+);
