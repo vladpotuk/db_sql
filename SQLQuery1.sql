@@ -1,7 +1,7 @@
-USE db_example_1
-GO
+USE db_sql;
 -- SELECT Query:
 -- 1. Вивести вміст таблиці палат.
+
 SELECT * FROM Wards;
 
 -- 2. Вивести прізвища та телефони всіх лікарів.
